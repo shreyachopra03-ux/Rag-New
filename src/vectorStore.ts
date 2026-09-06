@@ -20,11 +20,11 @@ export class VectorStore {
         return dot / (Math.sqrt(normA) * Math.sqrt(normB));
     }
 
-    search(queryEmbedding: number[], topk = 4): string[] {
+    search(queryEmbedding: number[], topK = 4): string[] {
         return this.data
             .map(d => ({ text: d.text, score: this.cosineSim(queryEmbedding, d.embedding) }))
             .sort((a, b) => b.score - a.score)
-            .slice(0, topk)
+            .slice(0, topK)
             .map(d => d.text);
     }
 }
